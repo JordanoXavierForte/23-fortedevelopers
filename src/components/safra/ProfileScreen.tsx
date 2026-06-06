@@ -144,7 +144,7 @@ export function ProfileScreen({ go: _go }: { go: (s: Screen) => void }) {
 
       {/* Ação — editar perfil */}
       <div className="px-4 pt-1">
-        <button className="flex w-full items-center justify-center gap-2 rounded-[12px] border-[1.5px] border-[var(--brand)] py-3 text-[13px] font-semibold text-[var(--brand)]" style={{ fontFamily: "var(--font-display)" }}>
+        <button onClick={() => _go("editProfile")} className="flex w-full items-center justify-center gap-2 rounded-[12px] border-[1.5px] border-[var(--brand)] py-3 text-[13px] font-semibold text-[var(--brand)]" style={{ fontFamily: "var(--font-display)" }}>
           <IconUsers size={15} /> Editar perfil
         </button>
       </div>

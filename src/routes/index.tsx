@@ -11,6 +11,7 @@ import { GroupBuyDetailScreen } from "@/components/safra/GroupBuyDetailScreen";
 import { VinculosScreen } from "@/components/safra/VinculosScreen";
 import { ProfileScreen } from "@/components/safra/ProfileScreen";
 import { ChatScreen } from "@/components/safra/ChatScreen";
+import { EditProfileScreen } from "@/components/safra/EditProfileScreen";
 import { IconLeaf, IconExpand, IconCollapse } from "@/components/safra/icons";
 import type { Screen } from "@/components/safra/types";
 
@@ -40,6 +41,7 @@ const screenLabels: Record<Screen, string> = {
   vinculos: "Vínculos",
   profile: "Perfil",
   chat: "Vínculos",
+  editProfile: "Perfil",
 };
 
 function Index() {
@@ -62,6 +64,7 @@ function Index() {
     screen === "machineDetail" ? "machines" :
     screen === "groupbuyDetail" ? "groupbuys" :
     screen === "chat" ? "vinculos" :
+    screen === "editProfile" ? "profile" :
     screen;
 
   return (
@@ -135,6 +138,7 @@ function Index() {
             {screen === "vinculos" && <VinculosScreen go={setScreen} />}
             {screen === "profile" && <ProfileScreen go={setScreen} />}
             {screen === "chat" && <ChatScreen go={setScreen} />}
+            {screen === "editProfile" && <EditProfileScreen go={setScreen} />}
             {screen !== "cadastro" && <BottomNav current={navHighlight} onChange={setScreen} />}
           </PhoneFrame>
           <button
