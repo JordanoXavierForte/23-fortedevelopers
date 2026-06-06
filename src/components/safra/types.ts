@@ -1,1 +1,9 @@
-export type Screen = "home" | "machines" | "machineDetail" | "groupbuys" | "groupbuyDetail" | "profile";
+export type Screen =
+  | "cadastro"
+  | "home"
+  | "machines"
+  | "machineDetail"
+  | "groupbuys"
+  | "groupbuyDetail"
+  | "vinculos"
+  | "profile";

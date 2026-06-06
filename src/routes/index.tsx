@@ -2,11 +2,13 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useState } from "react";
 import { PhoneFrame } from "@/components/safra/PhoneFrame";
 import { BottomNav } from "@/components/safra/BottomNav";
+import { CadastroScreen } from "@/components/safra/CadastroScreen";
 import { HomeScreen } from "@/components/safra/HomeScreen";
 import { MachinesScreen } from "@/components/safra/MachinesScreen";
 import { MachineDetailScreen } from "@/components/safra/MachineDetailScreen";
 import { GroupBuysScreen } from "@/components/safra/GroupBuysScreen";
 import { GroupBuyDetailScreen } from "@/components/safra/GroupBuyDetailScreen";
+import { VinculosScreen } from "@/components/safra/VinculosScreen";
 import { ProfileScreen } from "@/components/safra/ProfileScreen";
 import { IconLeaf, IconExpand, IconCollapse } from "@/components/safra/icons";
 import type { Screen } from "@/components/safra/types";
@@ -27,10 +29,21 @@ const features = [
   { title: "Economia transparente", desc: "Veja exatamente quanto está economizando vs. o mercado." },
 ];
 
+const screenLabels: Record<Screen, string> = {
+  cadastro: "Cadastro",
+  home: "Início",
+  machines: "Máquinas",
+  machineDetail: "Máquinas",
+  groupbuys: "Compras",
+  groupbuyDetail: "Compras",
+  vinculos: "Vínculos",
+  profile: "Perfil",
+};
+
 function Index() {
   const [screen, setScreen] = useState<Screen>("home");
   const [fullscreen, setFullscreen] = useState(false);
-  const navScreens: Screen[] = ["home", "machines", "groupbuys", "profile"];
+  const navScreens: Screen[] = ["cadastro", "home", "groupbuys", "vinculos", "profile"];
   const navHighlight: Screen =
     screen === "machineDetail" ? "machines" :
     screen === "groupbuyDetail" ? "groupbuys" :
@@ -88,7 +101,7 @@ function Index() {
                     border: navHighlight === s ? "1px solid var(--brand)" : "1px solid var(--line)",
                   }}
                 >
-                  {s === "home" ? "Início" : s === "machines" ? "Máquinas" : s === "groupbuys" ? "Compras" : "Perfil"}
+                  {screenLabels[s]}
                 </button>
               ))}
             </div>
@@ -106,13 +119,15 @@ function Index() {
             {fullscreen ? "Reduzir" : "Tela cheia"}
           </button>
           <PhoneFrame fullscreen={fullscreen}>
+            {screen === "cadastro" && <CadastroScreen go={setScreen} />}
             {screen === "home" && <HomeScreen go={setScreen} />}
             {screen === "machines" && <MachinesScreen go={setScreen} />}
             {screen === "machineDetail" && <MachineDetailScreen go={setScreen} />}
             {screen === "groupbuys" && <GroupBuysScreen go={setScreen} />}
             {screen === "groupbuyDetail" && <GroupBuyDetailScreen go={setScreen} />}
+            {screen === "vinculos" && <VinculosScreen go={setScreen} />}
             {screen === "profile" && <ProfileScreen go={setScreen} />}
-            <BottomNav current={navHighlight} onChange={setScreen} />
+            {screen !== "cadastro" && <BottomNav current={navHighlight} onChange={setScreen} />}
           </PhoneFrame>
           {!fullscreen && (
             <div className="text-[11px] text-[var(--ink-faint)]">

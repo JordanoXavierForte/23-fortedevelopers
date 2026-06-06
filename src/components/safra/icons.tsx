@@ -64,4 +64,22 @@ export const IconExpand = ({ size = 14, ...p }: IconProps) => (
 export const IconCollapse = ({ size = 14, ...p }: IconProps) => (
   <svg {...base(size)} {...p}><path d="M10 4v6H4" /><path d="M14 20v-6h6" /><path d="M10 10L3 3" /><path d="M14 14l7 7" /></svg>
 );
+export const IconLink = ({ size = 20, ...p }: IconProps) => (
+  <svg {...base(size)} {...p}><path d="M9 15l6-6" /><path d="M8 7l1-1a4 4 0 0 1 6 6l-1 1" /><path d="M16 17l-1 1a4 4 0 0 1-6-6l1-1" /></svg>
+);
+export const IconPlus = ({ size = 16, ...p }: IconProps) => (
+  <svg {...base(size)} {...p}><path d="M12 5v14" /><path d="M5 12h14" /></svg>
+);
+export const IconSparkle = ({ size = 14, ...p }: IconProps) => (
+  <svg {...base(size)} {...p}><path d="M12 3l1.8 4.7L18 9l-4.2 1.3L12 15l-1.8-4.7L6 9l4.2-1.3L12 3Z" /></svg>
+);
+export const IconChat = ({ size = 14, ...p }: IconProps) => (
+  <svg {...base(size)} {...p}><path d="M4 5h16v11H8l-4 3V5Z" /></svg>
+);
+export const IconShield = ({ size = 14, ...p }: IconProps) => (
+  <svg {...base(size)} {...p}><path d="M12 3l7 3v5c0 5-3.5 8-7 10-3.5-2-7-5-7-10V6l7-3Z" /><path d="M9 12l2 2 4-4" /></svg>
+);
+export const IconAlert = ({ size = 14, ...p }: IconProps) => (
+  <svg {...base(size)} {...p}><path d="M12 4l9 16H3l9-16Z" /><path d="M12 10v4" /><path d="M12 17h.01" /></svg>
+);
 

@@ -1,10 +1,11 @@
-import { IconHome, IconTractor, IconCart, IconUser } from "./icons";
+import { IconHome, IconTractor, IconCart, IconLink, IconUser } from "./icons";
 import type { Screen } from "./types";
 
 const items: { id: Screen; label: string; Icon: typeof IconHome }[] = [
   { id: "home", label: "Início", Icon: IconHome },
   { id: "machines", label: "Máquinas", Icon: IconTractor },
   { id: "groupbuys", label: "Compras", Icon: IconCart },
+  { id: "vinculos", label: "Vínculos", Icon: IconLink },
   { id: "profile", label: "Perfil", Icon: IconUser },
 ];
 

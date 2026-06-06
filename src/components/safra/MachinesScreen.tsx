@@ -57,7 +57,7 @@ export function MachinesScreen({ go }: { go: (s: Screen) => void }) {
                   <IconStar size={10} style={{ color: "var(--accent)" }} /> {m.rating} · {m.owner}
                 </div>
                 <div className="mt-0.5 flex items-center gap-1 text-[9px] text-[var(--ink-faint)]">
-                  <IconMapPin size={10} /> {m.distance}
+                  <IconMapPin size={10} /> {m.distance} · Score {m.ownerScore}
                 </div>
                 <div className="mt-1.5 flex items-baseline gap-1.5">
                   <span style={{ fontFamily: "var(--font-display)" }} className="text-[16px] leading-none text-[var(--brand)]">
