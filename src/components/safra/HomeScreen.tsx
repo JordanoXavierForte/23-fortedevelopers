@@ -1,6 +1,6 @@
-import { IconBell, IconLeaf, IconUsers, IconTrendDown, IconStar, IconShield } from "./icons";
+import { IconBell, IconLeaf, IconUsers, IconTrendDown, IconStar, IconShield, IconSparkle } from "./icons";
 import type { Screen } from "./types";
-import { fmtBRL, me, machines, groupBuys } from "./data";
+import { fmtBRL, me, machines, groupBuys, matches } from "./data";
 
 export function HomeScreen({ go }: { go: (s: Screen) => void }) {
   return (
@@ -93,6 +93,54 @@ export function HomeScreen({ go }: { go: (s: Screen) => void }) {
             <span>Você fez <strong>{me.deals} negócios</strong> com vizinhos até agora. Continue!</span>
           </div>
         </div>
+      </div>
+
+      {/* Matches do algoritmo KNN */}
+      <div className="px-4 pt-4">
+        <div className="mb-2 flex items-center justify-between">
+          <h3 style={{ fontFamily: "var(--font-display)" }} className="inline-flex items-center gap-1.5 text-[15px]">
+            <span style={{ color: "var(--accent)" }}><IconSparkle size={14} /></span>
+            Vizinhos compatíveis
+          </h3>
+          <button onClick={() => go("vinculos")} className="text-[11px] font-semibold text-[var(--brand)]">Ver todos</button>
+        </div>
+        <div className="text-[10px] text-[var(--ink-faint)] mb-3">Resultado do KNN · {me.neighbors} produtores num raio de 150 km</div>
+        {matches.slice(0, 2).map((m) => (
+          <div
+            key={m.name}
+            className="mb-2 rounded-[16px] border border-[var(--line)] bg-white p-3.5 shadow-sm"
+          >
+            <div className="flex items-center gap-3">
+              <div
+                className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[var(--brand)] text-[14px] font-bold text-white"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                {m.initials}
+              </div>
+              <div className="min-w-0 flex-1">
+                <div className="flex items-baseline gap-2">
+                  <span style={{ fontFamily: "var(--font-display)" }} className="text-[13px]">{m.name}</span>
+                  <span className="text-[10px] text-[var(--ink-faint)]">· {m.city} · {m.distKm} km</span>
+                </div>
+                <div className="mt-0.5 text-[11px] text-[var(--ink-faint)]">{m.reason}</div>
+              </div>
+              <div style={{ fontFamily: "var(--font-display)", color: "var(--accent)" }} className="shrink-0 text-[20px] leading-none">
+                {m.pct}%
+              </div>
+            </div>
+            <div className="mt-2.5 flex gap-2">
+              <div className="flex-1 rounded-[10px] bg-[var(--surface-2,#F9F7F3)] px-2.5 py-1.5 text-center text-[10px] text-[var(--ink-faint)]">
+                ⭐ Score {m.score}
+              </div>
+              <button
+                onClick={() => go("vinculos")}
+                className="flex-1 rounded-[10px] bg-[var(--brand)] py-1.5 text-[11px] font-semibold text-white"
+              >
+                Iniciar vínculo
+              </button>
+            </div>
+          </div>
+        ))}
       </div>
 
       {/* Compras abertas */}
