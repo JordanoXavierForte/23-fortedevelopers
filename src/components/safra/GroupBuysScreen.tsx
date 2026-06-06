@@ -2,7 +2,7 @@ import { IconArrowLeft, IconUsers, IconTrendDown } from "./icons";
 import { fmtBRL, groupBuys } from "./data";
 import type { Screen } from "./types";
 
-export function GroupBuysScreen({ go }: { go: (s: Screen) => void }) {
+export function GroupBuysScreen({ go, onSelectGroupBuy }: { go: (s: Screen) => void; onSelectGroupBuy: (id: string) => void }) {
   return (
     <div className="flex-1 overflow-y-auto">
       <div className="rounded-b-[24px] bg-[var(--brand)] px-5 pb-5 pt-12 text-white">
@@ -32,7 +32,7 @@ export function GroupBuysScreen({ go }: { go: (s: Screen) => void }) {
           return (
             <button
               key={g.id}
-              onClick={() => go("groupbuyDetail")}
+              onClick={() => onSelectGroupBuy(g.id)}
               className="flex w-full gap-3 overflow-hidden rounded-[14px] border border-[var(--line)] bg-white p-2.5 text-left active:scale-[0.99]"
             >
               <img src={g.image} alt={g.product} className="h-[92px] w-[92px] shrink-0 rounded-[10px] object-cover" loading="lazy" />
