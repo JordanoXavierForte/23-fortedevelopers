@@ -20,7 +20,7 @@ export function GroupBuyDetailScreen({ go }: { go: (s: Screen) => void }) {
   return (
     <div className="flex-1 overflow-y-auto pb-4">
       {/* Header */}
-      <div className="relative rounded-b-[28px] bg-[var(--brand)] px-5 pb-6 pt-3 text-white">
+      <div className="relative rounded-b-[28px] bg-[var(--brand)] px-5 pb-6 pt-12 text-white">
         <button onClick={() => go("groupbuys")} className="mb-2 grid h-8 w-8 place-items-center rounded-[9px] bg-white/15">
           <IconArrowLeft />
         </button>

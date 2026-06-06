@@ -12,7 +12,7 @@ export function MachineDetailScreen({ go }: { go: (s: Screen) => void }) {
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-transparent to-transparent" />
         <button
           onClick={() => go("machines")}
-          className="absolute left-4 top-3 grid h-9 w-9 place-items-center rounded-[10px] bg-white/90 text-[var(--ink)] backdrop-blur"
+          className="absolute left-4 top-12 grid h-9 w-9 place-items-center rounded-[10px] bg-white/90 text-[var(--ink)] backdrop-blur"
         >
           <IconArrowLeft />
         </button>

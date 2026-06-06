@@ -5,7 +5,7 @@ import type { Screen } from "./types";
 export function GroupBuysScreen({ go }: { go: (s: Screen) => void }) {
   return (
     <div className="flex-1 overflow-y-auto">
-      <div className="rounded-b-[24px] bg-[var(--brand)] px-5 pb-5 pt-3 text-white">
+      <div className="rounded-b-[24px] bg-[var(--brand)] px-5 pb-5 pt-12 text-white">
         <div className="mb-3 flex items-center gap-3">
           <button onClick={() => go("home")} className="grid h-8 w-8 place-items-center rounded-[9px] bg-white/15">
             <IconArrowLeft />
