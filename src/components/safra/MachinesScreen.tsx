@@ -73,33 +73,55 @@ export function MachinesScreen({ go }: { go: (s: Screen) => void }) {
         </div>
       </div>
 
-      <div className="space-y-2 px-4 pb-4 pt-3">
+      <div className="space-y-3 px-4 pb-4 pt-3">
         {filtered.map((m) => {
           const saving = Math.round(((m.marketPrice - m.pricePerDay) / m.marketPrice) * 100);
           return (
             <button
               key={m.id}
               onClick={() => go("machineDetail")}
-              className="flex w-full gap-3 overflow-hidden rounded-[14px] border border-[var(--line)] bg-white p-2.5 text-left transition active:scale-[0.99]"
+              className="w-full overflow-hidden rounded-[16px] border border-[var(--line)] bg-white text-left shadow-sm transition active:scale-[0.99]"
             >
-              <img src={m.image} alt={m.name} className="h-[88px] w-[88px] shrink-0 rounded-[10px] object-cover" loading="lazy" />
-              <div className="min-w-0 flex-1">
-                <div className="flex items-start justify-between gap-1">
-                  <div className="truncate text-[12px] font-semibold leading-tight">{m.name}</div>
+              {/* Imagem full-width */}
+              <div className="relative h-[140px] w-full overflow-hidden">
+                <img src={m.image} alt={m.name} className="h-full w-full object-cover" loading="lazy" />
+                {/* Badge de economia sobre a imagem */}
+                <span className="absolute left-2.5 top-2.5 rounded-full bg-[var(--brand)] px-2.5 py-1 text-[10px] font-bold text-white shadow">
+                  -{saving}% vs. aluguel
+                </span>
+                {/* Badge de disponibilidade */}
+                <span className="absolute bottom-2.5 right-2.5 rounded-full bg-black/50 px-2.5 py-1 text-[9px] font-medium text-white backdrop-blur-sm">
+                  {m.available}
+                </span>
+              </div>
+
+              {/* Informações */}
+              <div className="px-3.5 py-3">
+                <div className="truncate text-[13px] font-semibold leading-tight text-[var(--ink)]">
+                  {m.name}
                 </div>
-                <div className="mt-0.5 flex items-center gap-1 text-[9px] text-[var(--ink-faint)]">
-                  <IconStar size={10} style={{ color: "var(--accent)" }} /> {m.rating} · {m.owner}
-                </div>
-                <div className="mt-0.5 flex items-center gap-1 text-[9px] text-[var(--ink-faint)]">
-                  <IconMapPin size={10} /> {m.distance} · Score {m.ownerScore}
-                </div>
-                <div className="mt-1.5 flex items-baseline gap-1.5">
-                  <span style={{ fontFamily: "var(--font-display)" }} className="text-[16px] leading-none text-[var(--brand)]">
-                    {fmtBRL(m.pricePerDay)}
+
+                <div className="mt-1.5 flex items-center gap-3 text-[10px] text-[var(--ink-faint)]">
+                  <span className="flex items-center gap-1">
+                    <IconStar size={10} style={{ color: "var(--accent)" }} />
+                    {m.rating}
                   </span>
-                  <span className="text-[9px] text-[var(--ink-faint)]">/dia</span>
-                  <span className="ml-auto rounded-full bg-[var(--brand-pale)] px-1.5 py-0.5 text-[9px] font-semibold text-[var(--brand)]">
-                    -{saving}%
+                  <span className="flex items-center gap-1">
+                    <IconMapPin size={10} />
+                    {m.distance}
+                  </span>
+                  <span>{m.owner}</span>
+                </div>
+
+                <div className="mt-2.5 flex items-center justify-between">
+                  <div className="flex items-baseline gap-1">
+                    <span style={{ fontFamily: "var(--font-display)" }} className="text-[20px] leading-none text-[var(--brand)]">
+                      {fmtBRL(m.pricePerDay)}
+                    </span>
+                    <span className="text-[10px] text-[var(--ink-faint)]">/dia</span>
+                  </div>
+                  <span className="rounded-full border border-[var(--line)] px-2.5 py-1 text-[10px] font-semibold text-[var(--ink-soft)]">
+                    Score dono: {m.ownerScore}
                   </span>
                 </div>
               </div>

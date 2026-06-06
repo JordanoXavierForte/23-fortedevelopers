@@ -1,5 +1,5 @@
 import tractor from "@/assets/tractor.jpg";
-import harvester from "@/assets/harvester.jpg";
+import harvester from "@/assets/harvester-green.jpg";
 import sprayer from "@/assets/sprayer.jpg";
 import fertilizer from "@/assets/fertilizer.jpg";
 import seeds from "@/assets/seeds.jpg";
