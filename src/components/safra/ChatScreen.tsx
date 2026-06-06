@@ -88,9 +88,9 @@ export function ChatScreen({ go }: { go: (s: Screen) => void }) {
   }
 
   return (
-    <div className="flex h-full flex-col">
+    <div className="flex flex-1 flex-col overflow-hidden">
       {/* Header */}
-      <div className="flex items-center gap-3 bg-[var(--brand)] px-4 pb-3.5 pt-[64px] text-white">
+      <div className="flex items-center gap-3 bg-[var(--brand)] px-4 pb-3 pt-[56px] text-white">
         <button
           onClick={() => go("vinculos")}
           className="grid h-8 w-8 shrink-0 place-items-center rounded-[9px] bg-white/15"
