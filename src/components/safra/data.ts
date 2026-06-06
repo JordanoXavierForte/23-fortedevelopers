@@ -652,8 +652,8 @@ export const publicProfile = {
   name: "Rodrigo Melo",
   farm: "Fazenda Forte Santa",
   location: "Seberi, RS · 28 km de você",
-  score: 910,
-  band: "Faixa A",
+  score: 847,
+  band: "A",
   stats: [
     { value: "380 ha", label: "Área cultivada" },
     { value: "5", label: "Negócios feitos" },
