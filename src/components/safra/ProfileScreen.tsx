@@ -6,8 +6,8 @@ export function ProfileScreen({ go }: { go: (s: Screen) => void }) {
   return (
     <div className="flex-1 overflow-y-auto pb-4">
       {/* Header */}
-      <div className="relative rounded-b-[28px] bg-gradient-to-br from-[var(--brand-dark)] to-[var(--brand)] px-5 pb-6 pt-12 text-center text-white">
-        <button onClick={() => go("home")} className="absolute left-4 top-12 grid h-8 w-8 place-items-center rounded-[9px] bg-white/15">
+      <div className="relative rounded-b-[28px] bg-gradient-to-br from-[var(--brand-dark)] to-[var(--brand)] px-5 pb-6 pt-[64px] text-center text-white">
+        <button onClick={() => go("home")} className="absolute left-4 top-[64px] grid h-8 w-8 place-items-center rounded-[9px] bg-white/15">
           <IconArrowLeft />
         </button>
         <div className="relative mx-auto mt-2 grid h-[72px] w-[72px] place-items-center rounded-full border-[3px] border-white/40 bg-white/20" style={{ fontFamily: "var(--font-display)" }}>

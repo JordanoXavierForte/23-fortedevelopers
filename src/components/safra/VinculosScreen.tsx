@@ -89,7 +89,6 @@ export function VinculosScreen({ go }: { go: (s: Screen) => void }) {
     const el = tabsRef.current;
     if (!el) return;
     drag.current = { active: true, startX: e.clientX, scrollLeft: el.scrollLeft, moved: false };
-    el.setPointerCapture(e.pointerId);
   }
 
   function onPointerMove(e: React.PointerEvent) {
@@ -99,9 +98,8 @@ export function VinculosScreen({ go }: { go: (s: Screen) => void }) {
     tabsRef.current!.scrollLeft = drag.current.scrollLeft - dx;
   }
 
-  function onPointerUp(e: React.PointerEvent) {
+  function onPointerUp(_e: React.PointerEvent) {
     drag.current.active = false;
-    tabsRef.current?.releasePointerCapture(e.pointerId);
   }
 
   function onTabClick(id: string) {
@@ -111,7 +109,7 @@ export function VinculosScreen({ go }: { go: (s: Screen) => void }) {
   return (
     <div className="flex-1 overflow-y-auto pb-4">
       {/* Header */}
-      <div className="rounded-b-[28px] bg-[var(--brand)] px-5 pb-6 pt-12 text-white">
+      <div className="rounded-b-[28px] bg-[var(--brand)] px-5 pb-6 pt-[64px] text-white">
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="grid h-9 w-9 place-items-center rounded-[11px] bg-white/15"><IconLeaf size={18} /></div>
