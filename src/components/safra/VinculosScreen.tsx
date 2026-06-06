@@ -205,7 +205,7 @@ export function VinculosScreen({ go }: { go: (s: Screen) => void }) {
           </div>
           <div className="flex gap-2">
             <button className="flex-1 rounded-[10px] border border-white/30 bg-white/15 py-2.5 text-[12px] font-semibold">Ignorar</button>
-            <button onClick={() => go("profile")} className="flex-1 rounded-[10px] bg-white py-2.5 text-[12px] font-semibold text-[var(--brand)]">Iniciar vínculo</button>
+            <button onClick={() => go("chat")} className="flex-1 rounded-[10px] bg-white py-2.5 text-[12px] font-semibold text-[var(--brand)]">Iniciar vínculo</button>
           </div>
         </div>
       </div>
