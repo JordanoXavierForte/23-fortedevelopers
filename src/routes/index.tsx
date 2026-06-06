@@ -43,11 +43,17 @@ const screenLabels: Record<Screen, string> = {
 function Index() {
   const [screen, setScreen] = useState<Screen>("home");
   const [selectedMachineId, setSelectedMachineId] = useState<string>("m1");
+  const [selectedGroupBuyId, setSelectedGroupBuyId] = useState<string>("g1");
   const [fullscreen, setFullscreen] = useState(false);
 
   function goMachineDetail(id: string) {
     setSelectedMachineId(id);
     setScreen("machineDetail");
+  }
+
+  function goGroupBuyDetail(id: string) {
+    setSelectedGroupBuyId(id);
+    setScreen("groupbuyDetail");
   }
   const navScreens: Screen[] = ["cadastro", "home", "groupbuys", "vinculos", "profile"];
   const navHighlight: Screen =
@@ -129,8 +135,8 @@ function Index() {
             {screen === "home" && <HomeScreen go={setScreen} />}
             {screen === "machines" && <MachinesScreen go={setScreen} onSelectMachine={goMachineDetail} />}
             {screen === "machineDetail" && <MachineDetailScreen go={setScreen} machineId={selectedMachineId} />}
-            {screen === "groupbuys" && <GroupBuysScreen go={setScreen} />}
-            {screen === "groupbuyDetail" && <GroupBuyDetailScreen go={setScreen} />}
+            {screen === "groupbuys" && <GroupBuysScreen go={setScreen} onSelectGroupBuy={goGroupBuyDetail} />}
+            {screen === "groupbuyDetail" && <GroupBuyDetailScreen go={setScreen} groupBuyId={selectedGroupBuyId} />}
             {screen === "vinculos" && <VinculosScreen go={setScreen} />}
             {screen === "profile" && <ProfileScreen go={setScreen} />}
             {screen !== "cadastro" && <BottomNav current={navHighlight} onChange={setScreen} />}
