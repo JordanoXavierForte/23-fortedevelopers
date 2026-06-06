@@ -129,11 +129,6 @@ function Index() {
             {screen === "profile" && <ProfileScreen go={setScreen} />}
             {screen !== "cadastro" && <BottomNav current={navHighlight} onChange={setScreen} />}
           </PhoneFrame>
-          {!fullscreen && (
-            <div className="text-[11px] text-[var(--ink-faint)]">
-              Demo interativa · clique nos cards para navegar
-            </div>
-          )}
         </div>
       </div>
     </div>
