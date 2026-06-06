@@ -1,0 +1,47 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-ink-faint: var(--ink-faint);
+  --color-line: var(--line);
+  --color-brand: var(--brand);
+  --color-brand-dark: var(--brand-dark);
+  --color-brand-pale: var(--brand-pale);
+  --color-accent: var(--accent);
+  --color-danger: var(--danger);
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+}
+
+:root {
+  --bg: #F0ECE5;
+  --surface: #FFFFFF;
+  --surface-2: #F9F7F3;
+  --ink: #1C1C18;
+  --ink-soft: #6A6560;
+  --ink-faint: #B8B2AC;
+  --line: #E8E3DC;
+  --brand: #2B6A18;
+  --brand-dark: #1F4D11;
+  --brand-pale: #EFF6EA;
+  --accent: #E9A825;
+  --danger: #C04040;
+  --font-display: "DM Serif Display", Georgia, serif;
+  --font-sans: "DM Sans", -apple-system, system-ui, sans-serif;
+}
+
+@layer base {
+  * { border-color: var(--color-line); box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+}
