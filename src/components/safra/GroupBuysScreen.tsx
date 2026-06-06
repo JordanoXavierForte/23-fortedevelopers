@@ -1,8 +1,31 @@
+import { useState } from "react";
 import { IconArrowLeft, IconUsers, IconTrendDown } from "./icons";
 import { fmtBRL, groupBuys } from "./data";
+import { AlgoLoader } from "./AlgoLoader";
 import type { Screen } from "./types";
 
 export function GroupBuysScreen({ go, onSelectGroupBuy }: { go: (s: Screen) => void; onSelectGroupBuy: (id: string) => void }) {
+  const [ready, setReady] = useState(false);
+
+  if (!ready) {
+    return (
+      <div className="flex flex-1 flex-col">
+        <div className="rounded-b-[24px] bg-[var(--brand)] px-5 pb-5 pt-12 text-white">
+          <div className="mb-3 flex items-center gap-3">
+            <button onClick={() => go("home")} className="grid h-8 w-8 place-items-center rounded-[9px] bg-white/15">
+              <IconArrowLeft />
+            </button>
+            <div>
+              <div className="text-[10px] uppercase tracking-wider text-white/60">Insumos</div>
+              <div style={{ fontFamily: "var(--font-display)" }} className="text-[18px]">Compras conjuntas</div>
+            </div>
+          </div>
+        </div>
+        <AlgoLoader variant="groups" onDone={() => setReady(true)} />
+      </div>
+    );
+  }
+
   return (
     <div className="flex-1 overflow-y-auto">
       <div className="rounded-b-[24px] bg-[var(--brand)] px-5 pb-5 pt-12 text-white">

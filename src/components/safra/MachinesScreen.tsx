@@ -1,12 +1,14 @@
 import { useState, useRef } from "react";
 import { IconArrowLeft, IconStar, IconMapPin } from "./icons";
 import { fmtBRL, machines } from "./data";
+import { AlgoLoader } from "./AlgoLoader";
 import type { Screen } from "./types";
 
 const categories = ["Todos", "Tratores", "Colheita", "Pulverização"];
 
 export function MachinesScreen({ go, onSelectMachine }: { go: (s: Screen) => void; onSelectMachine: (id: string) => void }) {
   const [cat, setCat] = useState("Todos");
+  const [ready, setReady] = useState(false);
   const filtered = cat === "Todos" ? machines : machines.filter((m) => m.category === cat);
 
   const filterRef = useRef<HTMLDivElement>(null);
@@ -31,6 +33,25 @@ export function MachinesScreen({ go, onSelectMachine }: { go: (s: Screen) => voi
 
   function onCategoryClick(c: string) {
     if (!drag.current.moved) setCat(c);
+  }
+
+  if (!ready) {
+    return (
+      <div className="flex flex-1 flex-col">
+        <div className="rounded-b-[24px] bg-[var(--brand)] px-5 pb-5 pt-[64px]">
+          <div className="flex items-center gap-3 text-white">
+            <button onClick={() => go("home")} className="grid h-8 w-8 place-items-center rounded-[9px] bg-white/15">
+              <IconArrowLeft />
+            </button>
+            <div>
+              <div className="text-[10px] uppercase tracking-wider text-white/60">Catálogo</div>
+              <div style={{ fontFamily: "var(--font-display)" }} className="text-[18px] text-white">Aluguel de máquinas</div>
+            </div>
+          </div>
+        </div>
+        <AlgoLoader variant="machines" onDone={() => setReady(true)} />
+      </div>
+    );
   }
 
   return (
