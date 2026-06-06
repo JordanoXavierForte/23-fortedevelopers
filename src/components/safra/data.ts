@@ -255,6 +255,10 @@ export const me = {
   band: "A",
   neighbors: 34,
   savingsMonth: 4280,
+  savingsTotal: 18420,
+  savingsBuys: 11200,
+  savingsMachines: 7220,
+  deals: 8,
 };
 
 // ─────────────────────────────────────────────────────────────

@@ -1,6 +1,6 @@
-import { IconBell, IconLeaf, IconUsers, IconSparkle, IconStar, IconShield } from "./icons";
+import { IconBell, IconLeaf, IconUsers, IconTrendDown, IconStar, IconShield } from "./icons";
 import type { Screen } from "./types";
-import { fmtBRL, me, machines, groupBuys, matches } from "./data";
+import { fmtBRL, me, machines, groupBuys } from "./data";
 
 export function HomeScreen({ go }: { go: (s: Screen) => void }) {
   return (
@@ -47,31 +47,50 @@ export function HomeScreen({ go }: { go: (s: Screen) => void }) {
         </div>
       </div>
 
-      {/* Matches IA */}
+      {/* Resumo de economia */}
       <div className="px-4 pt-4">
-        <h3 style={{ fontFamily: "var(--font-display)" }} className="mb-2 flex items-center gap-1.5 text-[15px]">
-          <span className="text-[var(--accent)]"><IconSparkle size={15} /></span> Combinações para você
-        </h3>
-        <div className="rounded-[16px] bg-gradient-to-br from-[var(--brand)] to-[var(--brand-dark)] p-4 text-white">
-          <div className="text-[10px] font-bold uppercase tracking-[1px] text-white/60">Baseado no seu perfil e região</div>
-          <div style={{ fontFamily: "var(--font-display)" }} className="mt-1 text-[14px] leading-snug">
-            Produtores com alta chance de negócio com você
+        <div className="rounded-[16px] border border-[var(--line)] bg-white p-4 shadow-sm">
+          <div className="mb-3 flex items-center gap-2">
+            <span className="grid h-8 w-8 place-items-center rounded-[10px] bg-[var(--brand-pale)] text-[var(--brand)]">
+              <IconTrendDown size={16} />
+            </span>
+            <span style={{ fontFamily: "var(--font-display)" }} className="text-[14px] text-[var(--ink)]">Sua economia na Safra+</span>
           </div>
-          <div className="mt-3 space-y-2">
-            {matches.map((mt) => (
-              <button
-                key={mt.initials}
-                onClick={() => go("profile")}
-                className="flex w-full items-center gap-2.5 rounded-[10px] bg-white/12 px-3 py-2.5 text-left transition active:scale-[0.99]"
+
+          {/* Valor destaque */}
+          <div style={{ fontFamily: "var(--font-display)" }} className="text-[38px] leading-none text-[var(--brand)]">
+            {fmtBRL(me.savingsTotal)}
+          </div>
+          <div className="mt-1 text-[11px] text-[var(--ink-faint)]">economizados desde que você entrou</div>
+
+          {/* Breakdown */}
+          <div className="mt-4 grid grid-cols-3 gap-2">
+            {[
+              { label: "Este mês", value: fmtBRL(me.savingsMonth), highlight: true },
+              { label: "Compras", value: fmtBRL(me.savingsBuys) },
+              { label: "Máquinas", value: fmtBRL(me.savingsMachines) },
+            ].map((s) => (
+              <div
+                key={s.label}
+                className="rounded-[10px] px-2.5 py-2.5 text-center"
+                style={{ background: s.highlight ? "var(--brand-pale)" : "var(--surface-2,#F9F7F3)" }}
               >
-                <div className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-white/25 text-[12px] font-bold">{mt.initials}</div>
-                <div className="min-w-0 flex-1">
-                  <div className="truncate text-[12px] font-semibold">{mt.name} · {mt.city}</div>
-                  <div className="truncate text-[10px] text-white/70">{mt.reason}</div>
+                <div
+                  style={{ fontFamily: "var(--font-display)" }}
+                  className="text-[13px] leading-tight"
+                  data-highlight={s.highlight}
+                >
+                  <span style={{ color: s.highlight ? "var(--brand)" : "var(--ink)" }}>{s.value}</span>
                 </div>
-                <div style={{ fontFamily: "var(--font-display)" }} className="text-[15px] text-[var(--accent)]">{mt.pct}%</div>
-              </button>
+                <div className="mt-0.5 text-[9px] text-[var(--ink-faint)]">{s.label}</div>
+              </div>
             ))}
+          </div>
+
+          {/* Frase motivacional */}
+          <div className="mt-3 flex items-center gap-2 rounded-[10px] bg-[var(--brand-pale)] px-3 py-2.5 text-[11px] text-[var(--brand)]">
+            <IconUsers size={14} />
+            <span>Você fez <strong>{me.deals} negócios</strong> com vizinhos até agora. Continue!</span>
           </div>
         </div>
       </div>
