@@ -2,8 +2,8 @@ import { IconArrowLeft, IconStar, IconMapPin, IconCheck, IconClock } from "./ico
 import { fmtBRL, machines } from "./data";
 import type { Screen } from "./types";
 
-export function MachineDetailScreen({ go }: { go: (s: Screen) => void }) {
-  const m = machines[0];
+export function MachineDetailScreen({ go, machineId }: { go: (s: Screen) => void; machineId: string }) {
+  const m = machines.find((x) => x.id === machineId) ?? machines[0];
   const saving = Math.round(((m.marketPrice - m.pricePerDay) / m.marketPrice) * 100);
   return (
     <div className="flex-1 overflow-y-auto">

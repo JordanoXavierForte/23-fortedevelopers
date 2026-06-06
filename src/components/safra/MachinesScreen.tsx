@@ -5,7 +5,7 @@ import type { Screen } from "./types";
 
 const categories = ["Todos", "Tratores", "Colheita", "Pulverização"];
 
-export function MachinesScreen({ go }: { go: (s: Screen) => void }) {
+export function MachinesScreen({ go, onSelectMachine }: { go: (s: Screen) => void; onSelectMachine: (id: string) => void }) {
   const [cat, setCat] = useState("Todos");
   const filtered = cat === "Todos" ? machines : machines.filter((m) => m.category === cat);
 
@@ -77,7 +77,7 @@ export function MachinesScreen({ go }: { go: (s: Screen) => void }) {
           return (
             <button
               key={m.id}
-              onClick={() => go("machineDetail")}
+              onClick={() => onSelectMachine(m.id)}
               className="w-full overflow-hidden rounded-[16px] border border-[var(--line)] bg-white text-left shadow-sm transition active:scale-[0.99]"
             >
               {/* Imagem full-width */}
