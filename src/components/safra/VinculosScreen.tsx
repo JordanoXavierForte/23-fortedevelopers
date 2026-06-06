@@ -89,7 +89,6 @@ export function VinculosScreen({ go }: { go: (s: Screen) => void }) {
     const el = tabsRef.current;
     if (!el) return;
     drag.current = { active: true, startX: e.clientX, scrollLeft: el.scrollLeft, moved: false };
-    el.setPointerCapture(e.pointerId);
   }
 
   function onPointerMove(e: React.PointerEvent) {
@@ -99,9 +98,8 @@ export function VinculosScreen({ go }: { go: (s: Screen) => void }) {
     tabsRef.current!.scrollLeft = drag.current.scrollLeft - dx;
   }
 
-  function onPointerUp(e: React.PointerEvent) {
+  function onPointerUp(_e: React.PointerEvent) {
     drag.current.active = false;
-    tabsRef.current?.releasePointerCapture(e.pointerId);
   }
 
   function onTabClick(id: string) {
