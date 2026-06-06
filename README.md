@@ -287,24 +287,43 @@ scikit-learn
 
 ---
 
-## 🚀 Como Executar
+## 🚀 Guia de Instalação e Execução
+
+### Pré-requisitos
+
+- [Bun](https://bun.sh) — runtime e gerenciador de pacotes (substitui Node/npm)
+- Python 3.8+
 
 ### Frontend
 
 ```bash
-npm install
-npm run dev
-# acesse http://localhost:5173
+# 1. Instalar dependências
+bun install
+
+# 2. Iniciar servidor de desenvolvimento
+bun run dev
+# Acesse http://localhost:5173
+```
+
+Para gerar o build de produção:
+
+```bash
+bun run build
+bun run preview
+# Acesse http://localhost:4173
 ```
 
 ### Motor Python (demo do algoritmo)
 
 ```bash
+# 1. Instalar dependências Python
 pip install numpy scikit-learn
+
+# 2. Executar o motor
 python3 agroviz_engine.py
 ```
 
-O script imprime scores, matches KNN e candidatos para grupos de compra usando os 10 produtores do mock.
+O script imprime scores de confiança, matches KNN e candidatos para grupos de compra usando os 10 produtores do mock.
 
 ---
 
