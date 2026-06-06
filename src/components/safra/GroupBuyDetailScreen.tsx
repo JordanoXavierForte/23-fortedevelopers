@@ -3,8 +3,8 @@ import { IconArrowLeft, IconUsers, IconStar, IconArrowRight } from "./icons";
 import { fmtBRL, groupBuys } from "./data";
 import type { Screen } from "./types";
 
-export function GroupBuyDetailScreen({ go }: { go: (s: Screen) => void }) {
-  const g = groupBuys[0];
+export function GroupBuyDetailScreen({ go, groupBuyId }: { go: (s: Screen) => void; groupBuyId: string }) {
+  const g = groupBuys.find((x) => x.id === groupBuyId) ?? groupBuys[0];
   const [qty, setQty] = useState<string>("");
   const pct = Math.round((g.current / g.goal) * 100);
   const perUnitSaving = g.marketPrice - g.unitPrice;
