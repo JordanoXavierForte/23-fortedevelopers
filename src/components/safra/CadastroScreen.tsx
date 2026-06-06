@@ -65,7 +65,7 @@ export function CadastroScreen({ go }: { go: (s: Screen) => void }) {
   return (
     <div className="flex-1 overflow-y-auto pb-4">
       {/* Header */}
-      <div className="mb-4 rounded-b-[28px] bg-[var(--brand)] px-6 pb-6 pt-12 text-center text-white">
+      <div className="mb-4 rounded-b-[28px] bg-[var(--brand)] px-6 pb-6 pt-[64px] text-center text-white">
         <div className="flex items-center justify-center gap-2">
           <div className="grid h-8 w-8 place-items-center rounded-[10px] bg-white/15"><IconLeaf size={16} /></div>
           <span style={{ fontFamily: "var(--font-display)" }} className="text-[20px]">

@@ -29,17 +29,17 @@ export function PhoneFrame({ children, fullscreen = false }: { children: ReactNo
         {/* tela */}
         <div className="relative h-full w-full overflow-hidden rounded-[44px] bg-[var(--bg)]">
 
-          {/* status bar */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex h-[56px] items-center justify-between px-9 pt-4 text-[14px] font-semibold text-white">
-            <span>9:41</span>
-            <span className="flex items-center gap-1.5">
-              {/* sinal */}
-              <svg width="17" height="11" viewBox="0 0 17 11" fill="currentColor">
-                <rect x="0" y="7" width="3" height="4" rx="1" />
-                <rect x="4.5" y="5" width="3" height="6" rx="1" />
-                <rect x="9" y="2.5" width="3" height="8.5" rx="1" />
-                <rect x="13.5" y="0" width="3" height="11" rx="1" />
-              </svg>
+          {/* Dynamic Island */}
+          <div className="pointer-events-none absolute left-1/2 top-[14px] z-40 h-[34px] w-[118px] -translate-x-1/2 rounded-full bg-black" />
+
+          {/* status bar — time left of island, icons right of island */}
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex h-[56px] items-center text-[14px] font-semibold text-white">
+            {/* time — left side, before island */}
+            <span className="pl-8">9:41</span>
+            {/* spacer that pushes icons to the right of the island */}
+            <div className="flex-1" />
+            {/* icons — right side, after island */}
+            <span className="flex items-center gap-1.5 pr-8">
               {/* wifi */}
               <svg width="16" height="11" viewBox="0 0 16 12" fill="currentColor">
                 <path d="M8 2.2c2.6 0 5 1 6.8 2.7l-1.4 1.5A7.6 7.6 0 0 0 8 4.3 7.6 7.6 0 0 0 2.6 6.4L1.2 4.9A9.6 9.6 0 0 1 8 2.2Z" />
@@ -53,9 +53,6 @@ export function PhoneFrame({ children, fullscreen = false }: { children: ReactNo
               </span>
             </span>
           </div>
-
-          {/* Dynamic Island */}
-          <div className="pointer-events-none absolute left-1/2 top-3 z-40 h-[34px] w-[118px] -translate-x-1/2 rounded-full bg-black" />
 
           {/* conteúdo */}
           <div className="flex h-full flex-col">{children}</div>

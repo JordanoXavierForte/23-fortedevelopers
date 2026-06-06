@@ -37,7 +37,7 @@ export function MachinesScreen({ go }: { go: (s: Screen) => void }) {
 
   return (
     <div className="flex-1 overflow-y-auto">
-      <div className="rounded-b-[24px] bg-[var(--brand)] px-5 pb-5 pt-12">
+      <div className="rounded-b-[24px] bg-[var(--brand)] px-5 pb-5 pt-[64px]">
         <div className="mb-3 flex items-center gap-3 text-white">
           <button onClick={() => go("home")} className="grid h-8 w-8 place-items-center rounded-[9px] bg-white/15">
             <IconArrowLeft />
