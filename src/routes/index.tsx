@@ -13,6 +13,7 @@ import { ProfileScreen } from "@/components/safra/ProfileScreen";
 import { ChatScreen } from "@/components/safra/ChatScreen";
 import { EditProfileScreen } from "@/components/safra/EditProfileScreen";
 import { MachineChatScreen } from "@/components/safra/MachineChatScreen";
+import { ParticipantsScreen } from "@/components/safra/ParticipantsScreen";
 import { IconLeaf, IconExpand, IconCollapse } from "@/components/safra/icons";
 import type { Screen } from "@/components/safra/types";
 
@@ -44,6 +45,7 @@ const screenLabels: Record<Screen, string> = {
   chat: "Vínculos",
   editProfile: "Perfil",
   machineChat: "Máquinas",
+  participants: "Vínculos",
 };
 
 function Index() {
@@ -68,6 +70,7 @@ function Index() {
     screen === "chat" ? "vinculos" :
     screen === "editProfile" ? "profile" :
     screen === "machineChat" ? "vinculos" :
+    screen === "participants" ? "vinculos" :
     screen;
 
   return (
@@ -143,6 +146,7 @@ function Index() {
             {screen === "chat" && <ChatScreen go={setScreen} />}
             {screen === "editProfile" && <EditProfileScreen go={setScreen} />}
             {screen === "machineChat" && <MachineChatScreen go={setScreen} />}
+            {screen === "participants" && <ParticipantsScreen go={setScreen} />}
             {screen !== "cadastro" && <BottomNav current={navHighlight} onChange={setScreen} />}
           </PhoneFrame>
           <button

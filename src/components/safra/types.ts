@@ -9,4 +9,5 @@ export type Screen =
   | "profile"
   | "chat"
   | "editProfile"
-  | "machineChat";
+  | "machineChat"
+  | "participants";

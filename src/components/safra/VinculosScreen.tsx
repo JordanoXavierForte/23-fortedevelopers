@@ -64,7 +64,11 @@ function LinkCard({ v, go }: { v: Vinculo; go: (s: Screen) => void }) {
           {v.actions.map((a) => (
             <button
               key={a.label}
-              onClick={a.label === "Conversar" && v.id === "v3" ? () => go("machineChat") : undefined}
+              onClick={
+                (a.label === "Conversar" && v.id === "v3") ? () => go("machineChat") :
+                (a.label === "Ver participantes" && v.id === "v4") ? () => go("participants") :
+                undefined
+              }
               className={`flex-1 rounded-[10px] px-3 py-2.5 text-[12px] font-semibold transition active:scale-[0.98] ${btnVariant[a.variant]}`}
             >
               {a.label}
