@@ -25,7 +25,7 @@ const btnVariant = {
   ghost: "border-[1.5px] border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-faint)]",
 };
 
-function LinkCard({ v }: { v: Vinculo }) {
+function LinkCard({ v, go }: { v: Vinculo; go: (s: Screen) => void }) {
   const t = tone[v.status];
   const iconBg = v.iconTone === "earth" ? "#F0D9B5" : v.iconTone === "blue" ? "#D6EAF8" : "var(--brand-pale)";
   return (
@@ -62,7 +62,13 @@ function LinkCard({ v }: { v: Vinculo }) {
       {v.actions && (
         <div className="mt-3 flex gap-2">
           {v.actions.map((a) => (
-            <button key={a.label} className={`flex-1 rounded-[10px] px-3 py-2.5 text-[12px] font-semibold transition active:scale-[0.98] ${btnVariant[a.variant]}`}>{a.label}</button>
+            <button
+              key={a.label}
+              onClick={a.label === "Conversar" && v.id === "v3" ? () => go("machineChat") : undefined}
+              className={`flex-1 rounded-[10px] px-3 py-2.5 text-[12px] font-semibold transition active:scale-[0.98] ${btnVariant[a.variant]}`}
+            >
+              {a.label}
+            </button>
           ))}
         </div>
       )}
@@ -170,7 +176,7 @@ export function VinculosScreen({ go }: { go: (s: Screen) => void }) {
             </span>
             <span className="text-[11px] text-[var(--ink-faint)]">{actionNeeded.length} itens</span>
           </div>
-          {actionNeeded.map((v) => <LinkCard key={v.id} v={v} />)}
+          {actionNeeded.map((v) => <LinkCard key={v.id} v={v} go={go} />)}
         </div>
       )}
 
@@ -181,7 +187,7 @@ export function VinculosScreen({ go }: { go: (s: Screen) => void }) {
             <span style={{ fontFamily: "var(--font-display)" }} className="text-[14px]">🟢 Em andamento</span>
             <span className="text-[11px] text-[var(--ink-faint)]">{inProgress.length} vínculos</span>
           </div>
-          {inProgress.map((v) => <LinkCard key={v.id} v={v} />)}
+          {inProgress.map((v) => <LinkCard key={v.id} v={v} go={go} />)}
         </div>
       )}
 
@@ -216,7 +222,7 @@ export function VinculosScreen({ go }: { go: (s: Screen) => void }) {
           <span style={{ fontFamily: "var(--font-display)" }} className="text-[14px]">📋 Histórico recente</span>
           <span className="text-[11px] text-[var(--ink-faint)]">Ver todos</span>
         </div>
-        {vinculosHistory.map((v) => <LinkCard key={v.id} v={v} />)}
+        {vinculosHistory.map((v) => <LinkCard key={v.id} v={v} go={go} />)}
       </div>
     </div>
   );

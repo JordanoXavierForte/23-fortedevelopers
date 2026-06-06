@@ -8,4 +8,5 @@ export type Screen =
   | "vinculos"
   | "profile"
   | "chat"
-  | "editProfile";
+  | "editProfile"
+  | "machineChat";
