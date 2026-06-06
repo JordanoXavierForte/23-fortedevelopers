@@ -6,4 +6,5 @@ export type Screen =
   | "groupbuys"
   | "groupbuyDetail"
   | "vinculos"
-  | "profile";
+  | "profile"
+  | "chat";
