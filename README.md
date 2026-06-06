@@ -8,7 +8,7 @@ Plataforma mobile-first que conecta produtores rurais brasileiros por meio de um
 
 ## 🎥 Pitch
 
-[![Assista ao pitch do Safra+](https://img.youtube.com/vi/C91KSaocI0I/0.jpg)](https://www.youtube.com/watch?v=C91KSaocI0I)
+[Assista ao pitch do Safra+ no YouTube](https://www.youtube.com/watch?v=C91KSaocI0I)
 
 ---
 
