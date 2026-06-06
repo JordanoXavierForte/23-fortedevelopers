@@ -247,11 +247,11 @@ export const produtores: ProdutorMock[] = [
 // ─────────────────────────────────────────────────────────────
 
 export const me = {
-  name: "Carlos Bento",
-  initials: "CB",
-  farm: "Fazenda Santa Rita",
-  location: "Não-Me-Toque, RS",
-  score: 905,
+  name: "Rodrigo Tavares",
+  initials: "RT",
+  farm: "Fazenda Forte Santa",
+  location: "Seberi, RS",
+  score: 847,
   band: "A",
   neighbors: 34,
   savingsMonth: 4280,
@@ -648,12 +648,12 @@ export const vinculosHistory: Vinculo[] = [
 // ─────────────────────────────────────────────────────────────
 
 export const publicProfile = {
-  initials: "JM",
-  name: "José Melo",
-  farm: "Fazenda Boa Esperança",
-  location: "Carazinho, RS · 28 km de você",
-  score: 822,
-  band: "Faixa B",
+  initials: "RM",
+  name: "Rodrigo Melo",
+  farm: "Fazenda Forte Santa",
+  location: "Seberi, RS · 28 km de você",
+  score: 910,
+  band: "Faixa A",
   stats: [
     { value: "380 ha", label: "Área cultivada" },
     { value: "5", label: "Negócios feitos" },
