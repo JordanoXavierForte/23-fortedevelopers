@@ -3,7 +3,6 @@
 > **Vizinhos do agro — juntos custam menos.**
 
 Plataforma mobile-first que conecta produtores rurais brasileiros por meio de um **algoritmo de match inteligente**, viabilizando a locação de maquinários agrícolas ociosos e a compra conjunta de insumos — sem intermediários, sem mensalidade.
-
 Pitch: https://www.youtube.com/watch?si=QJejFhx_kdYroU-C&v=C91KSaocI0I&feature=youtu.be
 ---
 
