@@ -39,7 +39,7 @@ export function AlgoLoader({
 
   const title =
     variant === "machines"
-      ? "Buscando máquinas para você"
+      ? "Buscando máquinas para você "
       : "Calculando compras compatíveis";
 
   return (
