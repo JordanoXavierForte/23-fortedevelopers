@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { IconBell, IconLeaf, IconAlert, IconSparkle } from "./icons";
 import type { Screen } from "./types";
 import { vinculos, vinculosHistory, matches } from "./data";
@@ -82,6 +82,32 @@ export function VinculosScreen({ go }: { go: (s: Screen) => void }) {
   const inProgress = visible.filter((v) => v.status === "active" || v.status === "info");
   const topMatch = matches[0];
 
+  const tabsRef = useRef<HTMLDivElement>(null);
+  const drag = useRef({ active: false, startX: 0, scrollLeft: 0, moved: false });
+
+  function onPointerDown(e: React.PointerEvent) {
+    const el = tabsRef.current;
+    if (!el) return;
+    drag.current = { active: true, startX: e.clientX, scrollLeft: el.scrollLeft, moved: false };
+    el.setPointerCapture(e.pointerId);
+  }
+
+  function onPointerMove(e: React.PointerEvent) {
+    if (!drag.current.active) return;
+    const dx = e.clientX - drag.current.startX;
+    if (Math.abs(dx) > 4) drag.current.moved = true;
+    tabsRef.current!.scrollLeft = drag.current.scrollLeft - dx;
+  }
+
+  function onPointerUp(e: React.PointerEvent) {
+    drag.current.active = false;
+    tabsRef.current?.releasePointerCapture(e.pointerId);
+  }
+
+  function onTabClick(id: string) {
+    if (!drag.current.moved) setTab(id);
+  }
+
   return (
     <div className="flex-1 overflow-y-auto pb-4">
       {/* Header */}
@@ -109,13 +135,20 @@ export function VinculosScreen({ go }: { go: (s: Screen) => void }) {
       </div>
 
       {/* Tabs */}
-      <div className="flex gap-2 overflow-x-auto px-4 pt-4" style={{ scrollbarWidth: "none" }}>
+      <div
+        ref={tabsRef}
+        className="flex gap-2 overflow-x-auto px-4 pt-4 cursor-grab active:cursor-grabbing select-none"
+        onPointerDown={onPointerDown}
+        onPointerMove={onPointerMove}
+        onPointerUp={onPointerUp}
+        onPointerCancel={onPointerUp}
+      >
         {TABS.map((t) => {
           const active = tab === t.id;
           return (
             <button
               key={t.id}
-              onClick={() => setTab(t.id)}
+              onClick={() => onTabClick(t.id)}
               className="flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full border-[1.5px] px-3.5 py-2 text-[12px] font-medium transition"
               style={{
                 background: active ? "var(--brand)" : "white",
