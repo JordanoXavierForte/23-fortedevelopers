@@ -36,7 +36,13 @@
 }
 
 @layer base {
-  * { border-color: var(--color-line); box-sizing: border-box; }
+  * {
+    border-color: var(--color-line);
+    box-sizing: border-box;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  *::-webkit-scrollbar { display: none; }
   html, body { margin: 0; padding: 0; }
   body {
     background: var(--bg);

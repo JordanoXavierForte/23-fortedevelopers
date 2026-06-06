@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { IconArrowLeft, IconStar, IconMapPin } from "./icons";
 import { fmtBRL, machines } from "./data";
 import type { Screen } from "./types";
@@ -8,6 +8,33 @@ const categories = ["Todos", "Tratores", "Colheita", "Pulverização"];
 export function MachinesScreen({ go }: { go: (s: Screen) => void }) {
   const [cat, setCat] = useState("Todos");
   const filtered = cat === "Todos" ? machines : machines.filter((m) => m.category === cat);
+
+  const filterRef = useRef<HTMLDivElement>(null);
+  const drag = useRef({ active: false, startX: 0, scrollLeft: 0, moved: false });
+
+  function onPointerDown(e: React.PointerEvent) {
+    const el = filterRef.current;
+    if (!el) return;
+    drag.current = { active: true, startX: e.clientX, scrollLeft: el.scrollLeft, moved: false };
+    el.setPointerCapture(e.pointerId);
+  }
+
+  function onPointerMove(e: React.PointerEvent) {
+    if (!drag.current.active) return;
+    const dx = e.clientX - drag.current.startX;
+    if (Math.abs(dx) > 4) drag.current.moved = true;
+    filterRef.current!.scrollLeft = drag.current.scrollLeft - dx;
+  }
+
+  function onPointerUp(e: React.PointerEvent) {
+    drag.current.active = false;
+    filterRef.current?.releasePointerCapture(e.pointerId);
+  }
+
+  function onCategoryClick(c: string) {
+    if (!drag.current.moved) setCat(c);
+  }
+
   return (
     <div className="flex-1 overflow-y-auto">
       <div className="rounded-b-[24px] bg-[var(--brand)] px-5 pb-5 pt-3">
@@ -22,11 +49,18 @@ export function MachinesScreen({ go }: { go: (s: Screen) => void }) {
             </div>
           </div>
         </div>
-        <div className="flex gap-1.5 overflow-x-auto">
+        <div
+          ref={filterRef}
+          className="flex gap-1.5 overflow-x-auto cursor-grab active:cursor-grabbing select-none"
+          onPointerDown={onPointerDown}
+          onPointerMove={onPointerMove}
+          onPointerUp={onPointerUp}
+          onPointerCancel={onPointerUp}
+        >
           {categories.map((c) => (
             <button
               key={c}
-              onClick={() => setCat(c)}
+              onClick={() => onCategoryClick(c)}
               className="whitespace-nowrap rounded-full px-3 py-1.5 text-[10px] font-semibold transition"
               style={{
                 background: cat === c ? "white" : "rgba(255,255,255,0.15)",
