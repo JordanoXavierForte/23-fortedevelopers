@@ -12,8 +12,8 @@ export const fmtBRL = (n: number) =>
 export const me = {
   name: "Rodrigo Tavares",
   initials: "RT",
-  farm: "Fazenda Santa Rita",
-  location: "Não-Me-Toque, RS",
+  farm: "Fazenda Forte Santa",
+  location: "Seberi, RS",
   score: 847,
   band: "A",
   neighbors: 34,
@@ -314,8 +314,8 @@ export const vinculosHistory: Vinculo[] = [
 export const publicProfile = {
   initials: "RM",
   name: "Rodrigo Melo",
-  farm: "Fazenda Boa Esperança",
-  location: "Carazinho, RS · 28 km de você",
+  farm: "Fazenda Forte Santa",
+  location: "Seberi, RS · 28 km de você",
   score: 910,
   band: "Faixa A",
   stats: [
