@@ -33,7 +33,7 @@ export function PhoneFrame({ children, fullscreen = false }: { children: ReactNo
           <div className="pointer-events-none absolute left-1/2 top-[14px] z-40 h-[34px] w-[118px] -translate-x-1/2 rounded-full bg-black" />
 
           {/* status bar — time left of island, icons right of island */}
-          <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex h-[56px] items-center text-[14px] font-semibold text-white">
+          <div className="pointer-events-none absolute inset-x-0 top-0 z-30 flex h-[56px] items-center bg-[var(--brand)] text-[14px] font-semibold text-white">
             {/* time — left side, before island */}
             <span className="pl-8">9:41</span>
             {/* spacer that pushes icons to the right of the island */}

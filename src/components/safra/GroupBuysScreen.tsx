@@ -9,8 +9,8 @@ export function GroupBuysScreen({ go, onSelectGroupBuy }: { go: (s: Screen) => v
 
   if (!ready) {
     return (
-      <div className="flex flex-1 flex-col">
-        <div className="rounded-b-[24px] bg-[var(--brand)] px-5 pb-5 pt-12 text-white">
+      <div className="flex flex-1 flex-col min-h-0">
+        <div className="rounded-b-[24px] bg-[var(--brand)] px-5 pb-5 pt-[64px] text-white">
           <div className="mb-3 flex items-center gap-3">
             <button onClick={() => go("home")} className="grid h-8 w-8 place-items-center rounded-[9px] bg-white/15">
               <IconArrowLeft />
@@ -28,7 +28,7 @@ export function GroupBuysScreen({ go, onSelectGroupBuy }: { go: (s: Screen) => v
 
   return (
     <div className="flex-1 overflow-y-auto">
-      <div className="rounded-b-[24px] bg-[var(--brand)] px-5 pb-5 pt-12 text-white">
+      <div className="rounded-b-[24px] bg-[var(--brand)] px-5 pb-5 pt-[64px] text-white">
         <div className="mb-3 flex items-center gap-3">
           <button onClick={() => go("home")} className="grid h-8 w-8 place-items-center rounded-[9px] bg-white/15">
             <IconArrowLeft />
