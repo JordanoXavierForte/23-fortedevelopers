@@ -10,8 +10,8 @@ export const fmtBRL = (n: number) =>
 
 /* ── PRODUTOR LOGADO ───────────────────────────────────────── */
 export const me = {
-  name: "Carlos Bento",
-  initials: "CB",
+  name: "Rodrigo Tavares",
+  initials: "RT",
   farm: "Fazenda Santa Rita",
   location: "Não-Me-Toque, RS",
   score: 847,
@@ -53,7 +53,7 @@ export const machines: Machine[] = [
     id: "m2",
     name: "Trator Valtra BH180",
     category: "Tratores",
-    owner: "Rodrigo Lima",
+    owner: "Mateus Lima",
     distance: "14 km",
     pricePerDay: 580,
     marketPrice: 980,
@@ -183,7 +183,7 @@ export type Match = {
 };
 
 export const matches: Match[] = [
-  { initials: "JM", name: "José Melo", city: "Carazinho", reason: "Mesma cultura · precisa de colheitadeira", pct: 94 },
+  { initials: "RM", name: "Rodrigo Melo", city: "Carazinho", reason: "Mesma cultura · precisa de colheitadeira", pct: 94 },
   { initials: "AR", name: "Ana Ritter", city: "Passo Fundo", reason: "Quer comprar ureia · volume similar ao seu", pct: 87 },
   { initials: "LP", name: "Lauro Pereira", city: "Lagoa Vermelha", reason: "Tem plantadeira disponível para aluguel", pct: 81 },
 ];
@@ -211,7 +211,7 @@ export const vinculos: Vinculo[] = [
     kind: "machine",
     icon: "🚜",
     iconTone: "earth",
-    title: "José Melo quer alugar sua colheitadeira",
+    title: "Rodrigo Melo quer alugar sua colheitadeira",
     sub: "S680 John Deere · 15 a 25 de outubro",
     status: "warn",
     badge: "Aprovar",
@@ -310,10 +310,10 @@ export const vinculosHistory: Vinculo[] = [
   },
 ];
 
-/* ── PERFIL PÚBLICO (José Melo, ex.) ──────────────────────── */
+/* ── PERFIL PÚBLICO (Rodrigo Melo, ex.) ───────────────────── */
 export const publicProfile = {
-  initials: "JM",
-  name: "José Melo",
+  initials: "RM",
+  name: "Rodrigo Melo",
   farm: "Fazenda Boa Esperança",
   location: "Carazinho, RS · 28 km de você",
   score: 910,

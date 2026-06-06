@@ -31,8 +31,8 @@
   --brand-pale: #EFF6EA;
   --accent: #E9A825;
   --danger: #C04040;
-  --font-display: "DM Serif Display", Georgia, serif;
-  --font-sans: "DM Sans", -apple-system, system-ui, sans-serif;
+  --font-display: "Sora", -apple-system, system-ui, sans-serif;
+  --font-sans: "Inter", -apple-system, system-ui, sans-serif;
 }
 
 @layer base {
