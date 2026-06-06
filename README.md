@@ -50,7 +50,7 @@ Painel centralizado com todos os links ativos do produtor — aluguéis em andam
 
 O coração da plataforma. Diferencia o Safra+ de um marketplace comum ao **conectar proativamente** os produtores em vez de apenas listar anúncios.
 
-O motor (`algorithm/match_engine.py`) é composto por **6 módulos encadeados**:
+O motor (`agroviz_engine.py`) é composto por **5 módulos encadeados**:
 
 ### Módulo 1 — Score de Confiabilidade (0–1000)
 
@@ -140,9 +140,18 @@ Rankeia anúncios de maquinário por relevância para o buscador:
 
 Tabela de compatibilidade cultura × máquina embutida (ex: soja → colheitadeira, plantadeira, pulverizador, trator).
 
-### Módulo 6 — Regressão Linear de Engajamento
+### Módulo 5 — Match de Máquinas
 
-Projeta o engajamento futuro do produtor (negócios/mês esperados) com base em: meses na plataforma, negócios acumulados, score, número de interesses e culturas. Produtores com tendência crescente recebem **bônus de visibilidade** no feed — aparecem primeiro nas sugestões para outros produtores.
+Rankeia anúncios de maquinário por relevância para o buscador:
+
+| Critério | Peso |
+|----------|------|
+| Tipo de máquina compatível com a cultura | 35% |
+| Score do proprietário | 30% |
+| Proximidade geográfica | 25% |
+| Preço relativo ao mercado | 10% |
+
+Tabela de compatibilidade cultura × máquina embutida (ex: soja → colheitadeira, plantadeira, pulverizador, trator).
 
 ---
 
@@ -154,19 +163,20 @@ Projeta o engajamento futuro do produtor (negócios/mês esperados) com base em:
 |---|-----------|--------|
 | R01 | Tela de cadastro do produtor (perfil, área, culturas, interesses) | ✅ Implementado |
 | R02 | Feed principal com sugestões de match | ✅ Implementado |
-| R03 | Módulo de Locação de Maquinários | ✅ Implementado |
-| R04 | Módulo de Compra Conjunta de Insumos | ✅ Implementado |
+| R03 | Módulo de Locação de Maquinários com navegação por card | ✅ Implementado |
+| R04 | Módulo de Compra Conjunta de Insumos com navegação por card | ✅ Implementado |
 | R05 | Tela "Meus Vínculos" (painel de conexões ativas) | ✅ Implementado |
 | R06 | Score de confiança multidimensional (0–1000) | ✅ Implementado |
 | R07 | KNN match com vetor de 12 features ponderadas | ✅ Implementado |
 | R08 | Match de grupo de compra com estimativa de economia | ✅ Implementado |
 | R09 | Match de máquinas por cultura e disponibilidade | ✅ Implementado |
-| R10 | Regressão linear de engajamento futuro | ✅ Implementado |
-| R11 | Distância geográfica via fórmula de Haversine | ✅ Implementado |
-| R12 | Dados mockados representando cenário real do agro brasileiro | ✅ Implementado |
-| R13 | Autenticação de usuários | 🚧 Fora do escopo do MVP |
-| R14 | Persistência de dados em banco | 🚧 Fora do escopo do MVP |
-| R15 | Backend em produção | 🚧 Fora do escopo do MVP |
+| R10 | Distância geográfica via fórmula de Haversine | ✅ Implementado |
+| R11 | Mock de 10 produtores reais do RS espelhado no motor Python | ✅ Implementado |
+| R12 | Motor Python executável independente (`agroviz_engine.py`) | ✅ Implementado |
+| R13 | Candidatos sugeridos por grupo de compra (MatchGrupoCompra) | ✅ Implementado |
+| R14 | Autenticação de usuários | 🚧 Fora do escopo do MVP |
+| R15 | Persistência de dados em banco | 🚧 Fora do escopo do MVP |
+| R16 | Backend em produção | 🚧 Fora do escopo do MVP |
 
 > **Nota MVP:** Esta versão utiliza dados simulados (mock) para demonstrar o fluxo completo da aplicação. A lógica do algoritmo de match é **totalmente funcional** e opera sobre esses dados. A ausência de backend é uma decisão deliberada de escopo para o hackathon.
 
@@ -176,16 +186,16 @@ Projeta o engajamento futuro do produtor (negócios/mês esperados) com base em:
 
 | Camada | Tecnologia |
 |--------|-----------|
-| Frontend | React + Tailwind CSS |
-| Algoritmo de Match | Python 3 · NumPy · pandas · scikit-learn |
-| Dados | Mock estático em JSON / dataclasses Python |
-| Fontes | Google Fonts (DM Sans, DM Serif Display) |
-| Deploy | — |
+| Frontend | React 19 · TypeScript · Tailwind CSS · Vite |
+| Roteamento | TanStack Router |
+| Algoritmo de Match | Python 3 · NumPy · scikit-learn |
+| Dados | Mock em TypeScript (`data.ts`) espelhado no motor Python |
+| Fontes | Google Fonts (DM Sans · DM Serif Display) |
+| Runtime | Bun |
 
 **Dependências Python:**
 ```
 numpy
-pandas
 scikit-learn
 ```
 
@@ -194,30 +204,32 @@ scikit-learn
 ## 🏗️ Arquitetura
 
 ```
-safra-plus/
+23-fortedevelopers/
 │
-├── frontend/                    # Aplicação React (mobile-first)
-│   ├── src/
-│   │   ├── components/
-│   │   │   ├── BottomNav/       # Navegação inferior (tabs)
-│   │   │   ├── MachineCard/     # Card de máquina para aluguel
-│   │   │   ├── GroupCard/       # Card de grupo de compra conjunta
-│   │   │   └── MatchScore/      # Indicador visual de score de match
-│   │   ├── pages/
-│   │   │   ├── Cadastro/        # Onboarding e perfil do produtor
-│   │   │   ├── Home/            # Feed principal com sugestões
-│   │   │   ├── Locacao/         # Módulo de aluguel de maquinários
-│   │   │   ├── CompraConjunta/  # Módulo de compra coletiva
-│   │   │   └── MeusVinculos/    # Painel de conexões ativas
-│   │   ├── data/
-│   │   │   └── mock.json        # Dados simulados
-│   │   └── App.jsx
-│   └── package.json
+├── src/
+│   ├── routes/
+│   │   └── index.tsx            # Rota raiz — orquestra navegação entre telas
+│   ├── components/safra/
+│   │   ├── data.ts              # Mock de dados (10 produtores · scores · matches)
+│   │   ├── types.ts             # Tipo Screen (union de todas as telas)
+│   │   ├── icons.tsx            # Ícones SVG inline
+│   │   ├── PhoneFrame.tsx       # Moldura do celular na demo
+│   │   ├── BottomNav.tsx        # Navegação inferior (tabs)
+│   │   ├── CadastroScreen.tsx   # Onboarding do produtor
+│   │   ├── HomeScreen.tsx       # Feed com matches e compras abertas
+│   │   ├── MachinesScreen.tsx   # Catálogo de máquinas para aluguel
+│   │   ├── MachineDetailScreen.tsx   # Detalhe de uma máquina
+│   │   ├── GroupBuysScreen.tsx  # Lista de compras coletivas
+│   │   ├── GroupBuyDetailScreen.tsx  # Detalhe de um grupo de compra
+│   │   ├── VinculosScreen.tsx   # Painel de vínculos ativos
+│   │   └── ProfileScreen.tsx    # Perfil público de um produtor
+│   └── assets/                  # Imagens (jpg)
 │
-├── algorithm/                   # Motor de match (Python)
-│   └── match_engine.py          # ScoreEngine · FeatureExtractor · MatchEngine
-│                                # RegressaoEngajamento · MatchGrupoCompra · MatchMaquina
+├── agroviz_engine.py            # Motor de match Python (executável standalone)
+│                                # ScoreEngine · FeatureExtractor · MatchEngine
+│                                # MatchGrupoCompra · mock de 10 produtores
 │
+├── package.json
 └── README.md
 ```
 
@@ -271,7 +283,22 @@ safra-plus/
 
 ## 🚀 Como Executar
 
-> *Guia de instalação e execução será adicionado até o Marco III (07:00h)*
+### Frontend
+
+```bash
+npm install
+npm run dev
+# acesse http://localhost:5173
+```
+
+### Motor Python (demo do algoritmo)
+
+```bash
+pip install numpy scikit-learn
+python3 agroviz_engine.py
+```
+
+O script imprime scores, matches KNN e candidatos para grupos de compra usando os 10 produtores do mock.
 
 ---
 
