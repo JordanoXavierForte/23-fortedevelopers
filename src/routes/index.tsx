@@ -121,15 +121,7 @@ function Index() {
         )}
 
         {/* Phone */}
-        <div className="relative flex flex-col items-center gap-4">
-          <button
-            onClick={() => setFullscreen((v) => !v)}
-            className="absolute -right-2 -top-2 z-30 inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-white px-3 py-1.5 text-[11px] font-semibold text-[var(--ink-soft)] shadow-sm transition hover:text-[var(--brand)]"
-            aria-label={fullscreen ? "Sair do modo cheio" : "Modo cheio"}
-          >
-            {fullscreen ? <IconCollapse /> : <IconExpand />}
-            {fullscreen ? "Reduzir" : "Tela cheia"}
-          </button>
+        <div className="flex flex-col items-center gap-3">
           <PhoneFrame fullscreen={fullscreen}>
             {screen === "cadastro" && <CadastroScreen go={setScreen} />}
             {screen === "home" && <HomeScreen go={setScreen} />}
@@ -141,6 +133,14 @@ function Index() {
             {screen === "profile" && <ProfileScreen go={setScreen} />}
             {screen !== "cadastro" && <BottomNav current={navHighlight} onChange={setScreen} />}
           </PhoneFrame>
+          <button
+            onClick={() => setFullscreen((v) => !v)}
+            className="inline-flex items-center gap-1.5 rounded-full border border-[var(--line)] bg-white/80 px-3.5 py-1.5 text-[11px] font-medium text-[var(--ink-faint)] shadow-sm backdrop-blur transition hover:border-[var(--brand)] hover:text-[var(--brand)]"
+            aria-label={fullscreen ? "Sair do modo cheio" : "Modo cheio"}
+          >
+            {fullscreen ? <IconCollapse /> : <IconExpand />}
+            {fullscreen ? "Reduzir" : "Tela cheia"}
+          </button>
         </div>
       </div>
     </div>
