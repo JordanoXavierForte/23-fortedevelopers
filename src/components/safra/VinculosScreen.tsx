@@ -25,9 +25,31 @@ const btnVariant = {
   ghost: "border-[1.5px] border-[var(--line)] bg-[var(--surface-2)] text-[var(--ink-faint)]",
 };
 
+function ConfirmingAnim() {
+  return (
+    <span className="flex items-center justify-center gap-2">
+      <span className="relative inline-flex h-5 w-5 items-center justify-center">
+        <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-white opacity-50" />
+        <span className="relative inline-flex h-4 w-4 items-center justify-center rounded-full border-[1.5px] border-white">
+          <svg width="7" height="7" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3.5">
+            <polyline points="20,6 9,17 4,12" />
+          </svg>
+        </span>
+      </span>
+      Confirmando…
+    </span>
+  );
+}
+
 function LinkCard({ v, go }: { v: Vinculo; go: (s: Screen) => void }) {
+  const [confirming, setConfirming] = useState(false);
   const t = tone[v.status];
   const iconBg = v.iconTone === "earth" ? "#F0D9B5" : v.iconTone === "blue" ? "#D6EAF8" : "var(--brand-pale)";
+
+  function handleConfirm() {
+    setConfirming(true);
+    setTimeout(() => setConfirming(false), 2500);
+  }
   return (
     <div className="mb-2.5 rounded-[16px] border border-[var(--line)] bg-white p-3.5 shadow-sm" style={{ borderLeft: `4px solid ${t.border}`, opacity: v.status === "done" ? 0.88 : 1 }}>
       <div className="flex items-start gap-3">
@@ -61,19 +83,24 @@ function LinkCard({ v, go }: { v: Vinculo; go: (s: Screen) => void }) {
 
       {v.actions && (
         <div className="mt-3 flex gap-2">
-          {v.actions.map((a) => (
-            <button
-              key={a.label}
-              onClick={
-                (a.label === "Conversar" && v.id === "v3") ? () => go("machineChat") :
-                (a.label === "Ver participantes" && v.id === "v4") ? () => go("participants") :
-                undefined
-              }
-              className={`flex-1 rounded-[10px] px-3 py-2.5 text-[12px] font-semibold transition active:scale-[0.98] ${btnVariant[a.variant]}`}
-            >
-              {a.label}
-            </button>
-          ))}
+          {v.actions.map((a) => {
+            const isConfirm = a.label === "Confirmar 12 ton" && v.id === "v2";
+            return (
+              <button
+                key={a.label}
+                onClick={
+                  (a.label === "Aprovar locação" && v.id === "v1") ? () => go("approveRental") :
+                  (a.label === "Conversar" && v.id === "v3") ? () => go("machineChat") :
+                  (a.label === "Ver participantes" && v.id === "v4") ? () => go("participants") :
+                  (isConfirm && !confirming) ? handleConfirm :
+                  undefined
+                }
+                className={`flex-1 rounded-[10px] px-3 py-2.5 text-[12px] font-semibold transition active:scale-[0.98] ${btnVariant[a.variant]}`}
+              >
+                {isConfirm && confirming ? <ConfirmingAnim /> : a.label}
+              </button>
+            );
+          })}
         </div>
       )}
     </div>
