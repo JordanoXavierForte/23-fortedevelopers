@@ -6,7 +6,7 @@ export function HomeScreen({ go }: { go: (s: Screen) => void }) {
   return (
     <div className="flex-1 overflow-y-auto">
       {/* Header */}
-      <div className="rounded-b-[28px] bg-[var(--brand)] px-5 pb-5 pt-3 text-white">
+      <div className="rounded-b-[28px] bg-[var(--brand)] px-5 pb-5 pt-12 text-white">
         <div className="mb-4 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="grid h-9 w-9 place-items-center rounded-[11px] bg-white/15">
